@@ -405,6 +405,6 @@ Route::get('/',function(){
 
 //$user=Auth::loginUsingId(3);
 //dd($user);
-
+//change to commit github
 
 });
