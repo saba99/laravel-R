@@ -51,4 +51,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->belongsToMany(Role::class)->withPivot('created_at','updated_at');
     }
+    public function isAdmin($newRole){
+
+       //return $this->roles();
+      
+       foreach($this->roles as $role){
+
+          if($role->name==$newRole){
+
+            return true;
+          }
+       }
+       return false;
+    }
 }

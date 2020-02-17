@@ -26,8 +26,9 @@ class CreatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>['required','max:2',new Uppercase()],
-            'description'=>'required'
+            'title'=>['required','max:50',new Uppercase()],
+            'description'=>'required',
+            'file'=>['required','max:1000','mimes:jpeg,png,jpg'],
         ];
     } 
     public function message(){
@@ -37,6 +38,10 @@ class CreatePostRequest extends FormRequest
             'title.required' => 'لطفا عنوان مطلب مورد نظر خود را انتخاب نمایید',
          'title.max'=>'تعداد کاراکتر های شما باید بیش از  دو کاراکتر باشد',
          'description.required'=>'لطفا توضیحات مطلب مورد نظر خود را وارد نمایید',
+         'file.required'=>'لطفا تصویر اصلی این مطلب را مشخص نمایید',
+         'file.max'=>'فایل ارسالی شما نباید بیش از یک مگابایت باشد',
+         'file.mimes'=>'باشد jpg یا pngنوع تصویر مطلب شما باید' 
+          
         ];
     }
 }

@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
  use App\Post;
 
 class PostsController extends Controller
-{
+{     
+
+
     /**
      * Display a listing of the resource.
      *
@@ -43,24 +45,45 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-      // return $request->all();
-
-    //   $this->validate($request,[
-
-    //    'title'=>'bail|required|max:10',
-    //    'description'=>'required'
 
 
-    //   ],[
-    //        'title.required'=>'لطفا عنوان مطلب مورد نظر خود را انتخاب نمایید',
-    //        'title.max'=>'تعداد کاراکتر های شما باید بیش از  دو کاراکتر باشد',
-    //        'description.required'=>'لطفا توضیحات مطلب مورد نظر خود را وارد نمایید',
+        
+        // echo $file->guessExtension();
 
-    //   ]);
+        // echo $file->getClientMimeType();
+        //echo $file->getClientSize();
+        //echo $file->getMaxFilesize();
 
-      $post=new Post();
+        // return $request->all();
+
+        //   $this->validate($request,[
+
+        //    'title'=>'bail|required|max:10',
+        //    'description'=>'required'
+
+
+        //   ],[
+        //        'title.required'=>'لطفا عنوان مطلب مورد نظر خود را انتخاب نمایید',
+        //        'title.max'=>'تعداد کاراکتر های شما باید بیش از  دو کاراکتر باشد',
+        //        'description.required'=>'لطفا توضیحات مطلب مورد نظر خود را وارد نمایید',
+
+        //   ]);
+
+         $post=new Post();
+        if( $request->file('file')){
+
+              $file=$request->file('file');
+             $name = $file->getClientOriginalName();
+             $file->move('images',$name);
+
+            // $input['path']=$name;
+            $post->path=$name;
+        }
+
+     
       $post->title=$request->title;
       $post->content= $request->description;
+      
       $post->user_id=1;
       $post->save();
 
@@ -215,4 +238,15 @@ class PostsController extends Controller
 
 //         $post=Post::onlyTrashed()->where('id',6)->forceDelete();
 //     }
-}
+} 
+
+Route::get('/session',function(Request $request){
+
+
+$request->session()->put(['username'=>'saba.h']);
+
+return $request->session()->all();
+
+    //return $request->session()->get('username');
+
+});

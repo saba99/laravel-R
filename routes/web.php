@@ -374,9 +374,13 @@ Route::resource('/posts','PostsController');
 
 Auth::routes(['verify'=>true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home' ,'HomeController@index')->middleware(['auth','verified'])->name('home');
 
-Route::get('/',function(){
+Route::middleware(['auth','verified'])->group(function(){
+
+    Route::get('/', 'HomeController@index');
+});
+//Route::get('/',function(){
 
 // $user=Auth::user();
 // //$user=Auth::check();
@@ -407,4 +411,32 @@ Route::get('/',function(){
 //dd($user);
 //change to commit github
 
-});
+//});
+
+//middleware
+Route::get('/admin',function(){
+
+//dd($user=Auth::user());
+$user=\App\User::find(4);
+($user_role=$user->roles);
+$user_role=$user->isAdmin('مدیر');
+//dd($user_role);*/
+
+
+//dd($user=Auth::check());
+ 
+($user=Auth::check());
+
+if($user='true'){
+
+    ($user=Auth::user());
+   ($admin=$user->roles());
+  // dd ($user->isAdmin()); //return false
+
+}
+
+    //(($user = Auth::user()->id));
+ 
+echo 'hello to admin page';
+
+})->middleware('isAdmin:مدیر');

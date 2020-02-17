@@ -15,22 +15,26 @@
 </div>
 @endif
 
-{!! Form::open(['method'=>'POST','action' => 'PostsController@store']) !!}
+{!! Form::open(['method'=>'POST','action' => 'PostsController@store','files'=>true]) !!}
     
 <div class="container">
-<div class="form-group">
+<div class="form-group text-right">
    
    
-    {!!Form::label('title', 'عنوان', ['class' => 'control-lable ']) !!}
+    {!!Form::label('title', 'عنوان', ['class' => 'control-lable','class'=>'text-right']) !!}
   {!! Form::text('title',null, ['class'=>'form-control']) !!}  
 </div>
-<div class="form-group">
+<div class="form-group text-right">
    {!!Form::label('description', 'توضیحات', ['class' => 'control-lable ']) !!}
   {!! Form::textarea('description',null, ['class'=>'form-control'])!!}  
 </div> 
-<div class="form-group">
+<div class="form-group text-right">
+   {!!Form::label('file','تصویر اصلی', ['class'=>'control-lable'])!!}
+  {!! Form::file('file',null, ['class'=>'form-control'])!!}  
+</div> 
+<div class="form-group text-right">
     
-  {!! Form::submit('ذخیره',null, ['class'=>'btn btn-primary'])!!}  
+  {!! Form::submit('ذخیره', ['class'=>'btn btn-primary'])!!}  
 </div>
 </div>
 {!! Form::close() !!}
